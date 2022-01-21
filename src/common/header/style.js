@@ -44,19 +44,7 @@ color:#333;
 export const SearchWrapper = styled.div `
  position:relative;
  float:left;
- .slide-enter{
-   transition:all .3s ease-out
- }
- .slide-enter-active{
-   width:240px;
- }
- .slide-exit{
-  transition:all .3s ease-out
- }
- .slide-exit-active{
-   width:160px;
- }
- .iconfont{
+.iconfont{
    position:absolute;
    top:15px;
    right:10px;
@@ -94,6 +82,19 @@ export const Navsearch = styled.input.attrs({ placeholder: "搜索" })
   }
   &.focused{
     width:240px;
+  }
+  
+  &.slide-enter{
+    transition:all .3s ease-out
+  }
+  &.slide-enter-active{
+    width:240px;
+  }
+  &.slide-exit{
+   transition:all .3s ease-out
+  }
+  &.slide-exit-active{
+    width:160px;
   }
 `
 

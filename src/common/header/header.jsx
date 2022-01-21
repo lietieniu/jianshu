@@ -1,27 +1,14 @@
 import React, { Component } from 'react';
 import {CSSTransition} from 'react-transition-group';
+import {connect} from 'react-redux';
+
 import { HeaderWrapper,Logo,Nav,Navitem,Navsearch,Addtion,Button,SearchWrapper} from './style';
-import './style.css'
-export default class Header extends Component {
-    constructor(props){
-      super(props);
-     this.state={
-         focused:false
-     }
-    }
-    handdleClick1=()=>{
-        this.setState({
-            focused:true
-        })
-    }
-    handdleClick2=()=>{
-        this.setState({
-            focused:false
-        })
-    }
-    
-    render() {
-        let {handdleClick1,handdleClick2}=this;
+import './style.css';
+
+class Header extends Component {
+   render() {
+     
+        let {focused,handdleInputFoucs, handdleInputBlur}=this.props
         return (
                 <HeaderWrapper>
                     <Logo href='./'></Logo>
@@ -34,14 +21,15 @@ export default class Header extends Component {
                         </Navitem>
                         <SearchWrapper>
                           <CSSTransition
-                           in={this.state.focused}
+                           in={focused.focused}
                            timeout={300}
                            classNames='slide'>
-                            <Navsearch className={this.state.focused?"focused":""} onFocus={handdleClick1} onBlur={handdleClick2}>
-
+                            <Navsearch className={focused.focused?"focused":""} onFocus={handdleInputFoucs}
+                            onBlur={handdleInputBlur}
+                            >
                             </Navsearch>
                             </CSSTransition>
-                            <span className={this.state.focused?"focused iconfont":"iconfont"}>&#xe6d9;</span>
+                            <span className={focused.focused?"focused iconfont":"iconfont"}>&#xe6d9;</span>
                           
                         </SearchWrapper>
                     </Nav>
@@ -55,4 +43,26 @@ export default class Header extends Component {
                 </HeaderWrapper>
                ) 
     }
+};
+const mapStateToProps = (state, ownProps) => {
+    return {
+       focused:state.Header 
+    }
+};
+const mapDispatchToProps = (dispatch, ownProps) => {
+    return {
+       handdleInputFoucs(){
+        const action={
+          type:"search_focus"
+        };
+        dispatch(action)
+       },
+       handdleInputBlur(){
+        const action={
+            type:"search_blur"
+          };
+          dispatch(action)
+       }
+    }
 }
+export default connect(mapStateToProps,mapDispatchToProps)(Header)
