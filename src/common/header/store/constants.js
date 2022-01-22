@@ -1,0 +1,2 @@
+export const SEARCH_FOCUS = 'SEARCH_FOCUS';
+export const SEARCH_ONBLUR = 'SEARCH_ONBLUR';

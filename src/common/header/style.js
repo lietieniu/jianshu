@@ -58,10 +58,49 @@ export const SearchWrapper = styled.div `
       background:#969696;
       color:#fff;
     }
- }
+ }`
+ //7.搜索框提示信息
+export const Searchinfo=styled.div 
+`position:absolute;
+ left:15px;
+ top:56px;
+ width:190px;
  
+ padding:0px 20px;
+ box-shadow:0 0 8px rgba(0,0,0,.2);
+ border:1px solid #f0f0;
+ border-radius:10px;
+ `
+ //8.搜索框内部标题
+ export const SearchinfoTitle=styled.div 
+`margin-top:15px;
+ margin-bottom:15px;
+ line-height:20px;
+ height:20px;
+ font-size:14px;
+ color:#96966;
 `
-    //5.搜索框样式
+ //9.搜索框内部换一换
+ export const SearchinfoSwitch=styled.span
+`float:right;
+ font-size:13px;
+`
+//10.搜索框内部元素
+export const SearchinfoItem=styled.a
+`display:block;
+float:left;
+font-size:12px;
+padding:0px 5px;
+height:20px;
+line-height:20px;
+border:1px solid #ddd;
+border-radius:3px;
+color:#787878;
+margin-right:10px;
+margin-bottom:12px;
+
+`
+//5.搜索框样式
 export const Navsearch = styled.input.attrs({ placeholder: "搜索" })
 ` box-sizing: border-box;
   width:160px;
