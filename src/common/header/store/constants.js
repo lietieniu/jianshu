@@ -1,2 +1,6 @@
 export const SEARCH_FOCUS = 'SEARCH_FOCUS';
 export const SEARCH_ONBLUR = 'SEARCH_ONBLUR';
+export const CHANGE_LIST='CHANGE_LIST';
+export const MOUSERENTER='MOUSERENTER';
+export const MOUSELEAVE='MOUSELEAVE';
+export const CHANGEPAGE='CHANGEPAGE';

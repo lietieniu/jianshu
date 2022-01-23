@@ -7,36 +7,47 @@ import { HeaderWrapper,Logo,Nav,Navitem,Navsearch,
 import './style.css';
 import {types} from './store/index';
 
-const getListArea=(show)=>{
-  if(show){
-     return(
-        <Searchinfo>
-        <SearchinfoTitle>
-         热门搜索:
-          <SearchinfoSwitch>
-              换一批
-          </SearchinfoSwitch>
-        </SearchinfoTitle>
-      <div>
-          <SearchinfoItem>教育</SearchinfoItem>
-          <SearchinfoItem>教育</SearchinfoItem>
-          <SearchinfoItem>教育</SearchinfoItem>
-          <SearchinfoItem>教育</SearchinfoItem>
-          <SearchinfoItem>教育</SearchinfoItem>
-          <SearchinfoItem>教育</SearchinfoItem>
-          <SearchinfoItem>教育</SearchinfoItem>
-          <SearchinfoItem>教育</SearchinfoItem>
-       </div>
-    </Searchinfo>
-     )
-  }else{
-      return null;
-  }
-}
+
 class Header extends Component {
-   render() {
-       
-        let {focused,searchFocus,searchBlur}=this.props
+  
+     getListArea=(show)=>{
+         let {list,page,totalPage,handleMouseEnter,handleMouseLeave,handleChangePage,}=this.props;
+         const pageList=[];
+         const newList=list.toJS();
+         for(let i=(page-1)*8;i<page*8;i++){
+          pageList.push(
+              <SearchinfoItem key={i}>{newList[i]}</SearchinfoItem>
+          )
+         }
+       if(show){
+           return(
+              <Searchinfo onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}> 
+              <SearchinfoTitle>
+               热门搜索:
+                <SearchinfoSwitch onClick={()=>{
+                    if(page<totalPage){
+                        handleChangePage(page+1)
+                    }else{
+                        handleChangePage(1)
+                    }
+                  }}>
+                    换一批
+                </SearchinfoSwitch>
+              </SearchinfoTitle>
+            <div>
+               {pageList}
+             </div>
+          </Searchinfo>
+           )
+        }else{
+            return null;
+        }
+      }
+   
+    render() {
+        let {searchFocus,searchBlur,getList,focused,mouseIn}=this.props;
+        let {getListArea}=this
+        
         return (
                 <HeaderWrapper>
                     <Logo href='./'></Logo>
@@ -52,13 +63,13 @@ class Header extends Component {
                            in={focused}
                            timeout={300}
                            classNames='slide'>
-                            <Navsearch className={focused?"focused":""} onFocus={searchFocus}
+                            <Navsearch className={focused?"focused":""} onFocus={searchFocus,getList}
                             onBlur={searchBlur}
                             >
                             </Navsearch>
                             </CSSTransition>
                             <span className={focused?"focused iconfont":"iconfont"}>&#xe6d9;</span>
-                            {getListArea(focused)}
+                            {getListArea(focused||mouseIn)}
                         </SearchWrapper>
                     </Nav>
                     <Addtion>
@@ -74,7 +85,11 @@ class Header extends Component {
 };
 const mapStateToProps = (state, ownProps) => {
     return {
-       focused:state.get("Header").get("focused") 
+       focused:state.get("Header").get("focused"),
+       list:state.get('Header').get('list'),
+       page:state.getIn(['Header','page']),
+       mouseIn:state.getIn(['Header','mouseIn']),
+       totalPage:state.getIn(['Header','totalPage'])
     }
 };
 // const mapDispatchToProps = (dispatch, ownProps) => {

@@ -64,8 +64,7 @@ export const Searchinfo=styled.div
 `position:absolute;
  left:15px;
  top:56px;
- width:190px;
- 
+ width:185px;
  padding:0px 20px;
  box-shadow:0 0 8px rgba(0,0,0,.2);
  border:1px solid #f0f0;
