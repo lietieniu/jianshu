@@ -44,7 +44,7 @@ color:#333;
 export const SearchWrapper = styled.div `
  position:relative;
  float:left;
-.iconfont{
+ .zoom{
    position:absolute;
    top:15px;
    right:10px;
@@ -83,6 +83,16 @@ export const Searchinfo=styled.div
  export const SearchinfoSwitch=styled.span
 `float:right;
  font-size:13px;
+ cursor:pointer;
+  .spin{
+    display:block;
+    float:left;
+    font-size:12px;
+    margin-right:2px;
+    transition:all .3s ease-in;
+    transform:rotate(0deg);
+    transform-origin:center center;
+  }
 `
 //10.搜索框内部元素
 export const SearchinfoItem=styled.a

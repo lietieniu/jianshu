@@ -12,13 +12,22 @@ class Header extends Component {
   
      getListArea=(show)=>{
          let {list,page,totalPage,handleMouseEnter,handleMouseLeave,handleChangePage,}=this.props;
-         const pageList=[];
-         const newList=list.toJS();
-         for(let i=(page-1)*8;i<page*8;i++){
-          pageList.push(
-              <SearchinfoItem key={i}>{newList[i]}</SearchinfoItem>
-          )
-         }
+        //  const pageList=[];
+        //  const newList=list.toJS();
+        //  for(let i=(page-1)*8;i<page*8;i++){
+        //   pageList.push(
+        //       <SearchinfoItem key={i}>{newList[i]}</SearchinfoItem>
+        //   )
+        //  }
+        const newList=list.toJS();
+        const pageList=[];
+        for(let i=(page-1)*8;i<page*8;i++){
+            pageList.push(
+                <SearchinfoItem key={i}>{newList[i]}</SearchinfoItem>
+            )
+        }
+
+
        if(show){
            return(
               <Searchinfo onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}> 
@@ -26,11 +35,13 @@ class Header extends Component {
                热门搜索:
                 <SearchinfoSwitch onClick={()=>{
                     if(page<totalPage){
-                        handleChangePage(page+1)
+                        handleChangePage(page+1,totalPage,this.spinIcon)
                     }else{
-                        handleChangePage(1)
+                        handleChangePage(1,totalPage,this.spinIcon)
                     }
                   }}>
+                <span ref={(icon)=>{this.spinIcon=icon}} //获得组件对应标记真实DOM节点
+                 className="iconfont spin">&#xe675;</span>
                     换一批
                 </SearchinfoSwitch>
               </SearchinfoTitle>
@@ -45,7 +56,7 @@ class Header extends Component {
       }
    
     render() {
-        let {searchFocus,searchBlur,getList,focused,mouseIn}=this.props;
+        let {searchFocus,searchBlur,getList,focused,mouseIn,list}=this.props;
         let {getListArea}=this
         
         return (
@@ -63,12 +74,14 @@ class Header extends Component {
                            in={focused}
                            timeout={300}
                            classNames='slide'>
-                            <Navsearch className={focused?"focused":""} onFocus={searchFocus,getList}
-                            onBlur={searchBlur}
-                            >
+                            <Navsearch className={focused?"focused":""}
+                            onFocus={()=>{if(list.size>0){getList()}else{searchFocus()}}}
+                            
+                            onFocus={getList}
+                            onBlur={searchBlur}>
                             </Navsearch>
                             </CSSTransition>
-                            <span className={focused?"focused iconfont":"iconfont"}>&#xe6d9;</span>
+                            <span className={focused?"focused iconfont zoom":"iconfont zoom"}>&#xe6d9;</span>
                             {getListArea(focused||mouseIn)}
                         </SearchWrapper>
                     </Nav>
@@ -87,9 +100,10 @@ const mapStateToProps = (state, ownProps) => {
     return {
        focused:state.get("Header").get("focused"),
        list:state.get('Header').get('list'),
+       totalPage:state.getIn(['Header','totalPage']),
        page:state.getIn(['Header','page']),
        mouseIn:state.getIn(['Header','mouseIn']),
-       totalPage:state.getIn(['Header','totalPage'])
+      
     }
 };
 // const mapDispatchToProps = (dispatch, ownProps) => {
