@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import {CSSTransition} from 'react-transition-group';
 import {connect} from 'react-redux';
 import { HeaderWrapper,Logo,Nav,Navitem,Navsearch,
@@ -6,9 +6,10 @@ import { HeaderWrapper,Logo,Nav,Navitem,Navsearch,
     Searchinfo,SearchinfoTitle,SearchinfoSwitch,SearchinfoItem} from './style';
 import './style.css';
 import {types} from './store/index';
+import { Link } from 'react-router-dom';
 
 
-class Header extends Component {
+class Header extends PureComponent {
   
      getListArea=(show)=>{
          let {list,page,totalPage,handleMouseEnter,handleMouseLeave,handleChangePage,}=this.props;
@@ -61,7 +62,9 @@ class Header extends Component {
         
         return (
                 <HeaderWrapper>
-                    <Logo href='./'></Logo>
+                <Link to='./' exact='true'>
+                    <Logo></Logo>
+                </Link>
                     <Nav>
                         <Navitem className='left active'>首页</Navitem>
                         <Navitem className='left'>下载App</Navitem>

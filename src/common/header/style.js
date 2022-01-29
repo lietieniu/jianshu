@@ -7,7 +7,7 @@ export const HeaderWrapper = styled.div `
   border-bottom:1px solid #f0f0f0;
 `;
 //2.Logo图标--点击跳转到首页
-export const Logo = styled.a `
+export const Logo = styled.div `
  position:absolute;
  left:0;
  top:0;
@@ -69,6 +69,7 @@ export const Searchinfo=styled.div
  box-shadow:0 0 8px rgba(0,0,0,.2);
  border:1px solid #f0f0;
  border-radius:10px;
+ background:#fff;
  `
  //8.搜索框内部标题
  export const SearchinfoTitle=styled.div 
