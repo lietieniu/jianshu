@@ -1,12 +1,14 @@
 import React, { PureComponent } from 'react';
 import {CSSTransition} from 'react-transition-group';
 import {connect} from 'react-redux';
+import { Link } from 'react-router-dom';
 import { HeaderWrapper,Logo,Nav,Navitem,Navsearch,
     Addtion,Button,SearchWrapper,
     Searchinfo,SearchinfoTitle,SearchinfoSwitch,SearchinfoItem} from './style';
 import './style.css';
 import {types} from './store/index';
-import { Link } from 'react-router-dom';
+
+
 
 
 class Header extends PureComponent {
@@ -57,18 +59,19 @@ class Header extends PureComponent {
       }
    
     render() {
-        let {searchFocus,searchBlur,getList,focused,mouseIn,list}=this.props;
+        let {searchFocus,searchBlur,getList,focused,mouseIn,list,login,logOut}=this.props;
         let {getListArea}=this
-        
         return (
                 <HeaderWrapper>
                 <Link to='./' exact='true'>
                     <Logo></Logo>
                 </Link>
                     <Nav>
-                        <Navitem className='left active'>首页</Navitem>
+                        <Link to='/'><Navitem className='left active'>首页</Navitem></Link>
                         <Navitem className='left'>下载App</Navitem>
-                        <Navitem className='right'>登录</Navitem>
+                        {login?<Navitem className='right'>退出</Navitem>:
+                        <Link to='/login' exact='true'><Navitem className='right'>登录</Navitem>
+                        </Link>}
                         <Navitem className='right'>
                         <i className='iconfont'>Aa</i>
                         </Navitem>
@@ -89,9 +92,7 @@ class Header extends PureComponent {
                         </SearchWrapper>
                     </Nav>
                     <Addtion>
-                    <Button className='writting'>
-                    <span className='iconfont'>&#xe604;</span>
-                        写文章</Button>
+                    <Link to='/write'><Button className='writting'><span className='iconfont'>&#xe604;</span>写文章</Button></Link>
                     <Button className='reg'>注册</Button>
                      
                     </Addtion>
@@ -106,6 +107,7 @@ const mapStateToProps = (state, ownProps) => {
        totalPage:state.getIn(['Header','totalPage']),
        page:state.getIn(['Header','page']),
        mouseIn:state.getIn(['Header','mouseIn']),
+       login:state.getIn(['loginReducer','login'])
       
     }
 };
@@ -125,4 +127,7 @@ const mapStateToProps = (state, ownProps) => {
 //        }
 //     }
 // }
+
+    
+
 export default connect(mapStateToProps,types)(Header)

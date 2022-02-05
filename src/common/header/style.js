@@ -2,7 +2,8 @@ import styled from 'styled-components';
 import Logopic from '../../statics/Logo.png'
 //1.头部整体编写
 export const HeaderWrapper = styled.div `
-  position:relative
+  z-index:1;
+  position:relative;
   height:56px;
   border-bottom:1px solid #f0f0f0;
 `;
