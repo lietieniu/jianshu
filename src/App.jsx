@@ -9,6 +9,7 @@ import Login from './pages/login';
 import Write from './pages/write';
 // 测试
 // 999
+// 666
 
 export default class App extends PureComponent {
   render() {
