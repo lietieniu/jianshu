@@ -18,3 +18,5 @@ export const getDetail=(id)=>{
       })
   }
 }
+
+// 异步
