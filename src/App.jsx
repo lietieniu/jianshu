@@ -7,6 +7,12 @@ import Home from './pages/home';
 import Detail from './pages/detail/loadable.js';
 import Login from './pages/login';
 import Write from './pages/write';
+// 测试
+// 999
+// 666
+// 888
+// 111
+// 333
 
 export default class App extends PureComponent {
   render() {
