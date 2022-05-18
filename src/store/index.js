@@ -5,3 +5,5 @@ import { reducer } from './reducer';
 
 const store = createStore(reducer,composeWithDevTools(applyMiddleware(thunk)));
 export default store;
+
+//88888888
