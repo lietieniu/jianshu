@@ -13,6 +13,8 @@ import Write from './pages/write';
 // 888
 // 111
 // 333
+//最后修改bug啊
+
 
 export default class App extends PureComponent {
   render() {
